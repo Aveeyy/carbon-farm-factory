@@ -1,5 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 
+const timeout = 60000;
+
 const getApiClient = (baseUrl: string) => {
   const apiClient = axios.create({
     baseURL: baseUrl,
@@ -7,6 +9,7 @@ const getApiClient = (baseUrl: string) => {
       "Content-Type": "application/json",
       Accept: "application/json",
     },
+    timeout: timeout,
   } satisfies AxiosRequestConfig);
   return apiClient;
 };
