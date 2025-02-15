@@ -17,6 +17,24 @@ interface AreaInputProps {
   onUnitChange: (unit: string) => void;
 }
 
+const convertAcresToMeters = (acres: number) => acres * 4046.86;
+const convertHectaresToMeters = (hectares: number) => hectares * 10000;
+const convertToSquareMeters = (value: string, unit: string) => {
+  const numericValue = parseFloat(value);
+  if (isNaN(numericValue)) return 0;
+
+  switch (unit) {
+    case "acres":
+      return convertAcresToMeters(numericValue);
+    case "hectares":
+      return convertHectaresToMeters(numericValue);
+    case "m2":
+      return numericValue;
+    default:
+      return 0;
+  }
+};
+
 const AreaInput = ({ value, onChange, unit, onUnitChange }: AreaInputProps) => {
   return (
     <Card className="w-full">
@@ -35,7 +53,9 @@ const AreaInput = ({ value, onChange, unit, onUnitChange }: AreaInputProps) => {
               type="number"
               placeholder="Enter size"
               value={value}
-              onChange={(e) => onChange(e.target.value)}
+              onChange={(e) =>
+                onChange(convertToSquareMeters(e.target.value, unit).toString())
+              }
               className="bg-white border-earthtone-200 hover:border-primary/80 transition-colors"
             />
             <Select value={unit} onValueChange={onUnitChange}>
@@ -45,6 +65,7 @@ const AreaInput = ({ value, onChange, unit, onUnitChange }: AreaInputProps) => {
               <SelectContent>
                 <SelectItem value="acres">Acres</SelectItem>
                 <SelectItem value="hectares">Hectares</SelectItem>
+                <SelectItem value="m2">Square Meters</SelectItem>
               </SelectContent>
             </Select>
           </div>
