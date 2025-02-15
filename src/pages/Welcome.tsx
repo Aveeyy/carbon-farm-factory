@@ -14,7 +14,7 @@ const Welcome = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#222222] overflow-hidden relative">
+    <div className="min-h-screen bg-[#3d6727] overflow-hidden relative">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Floating Leaves */}
