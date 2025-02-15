@@ -17,16 +17,16 @@ const Index = () => {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      {/* Background Image with Overlay */}
+      {/* New Banner Image with Dynamic Overlay */}
       <div 
-        className="absolute inset-0 bg-[url('/farm-landscape.jpg')] bg-cover bg-center"
+        className="absolute inset-0 bg-[url('/lovable-uploads/f39be7fd-607b-4fac-a198-571094cd3212.png')] bg-cover bg-center"
         style={{
-          backgroundImage: `linear-gradient(rgba(74, 93, 79, 0.2), rgba(74, 93, 79, 0.3)), url('/farm-landscape.jpg')`
+          backgroundImage: `linear-gradient(rgba(74, 93, 79, 0.1), rgba(74, 93, 79, 0.2)), url('/lovable-uploads/f39be7fd-607b-4fac-a198-571094cd3212.png')`
         }}
       />
 
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      {/* Animated Elements */}
+      <div className="absolute inset-0 pointer-events-none">
         <motion.div
           animate={{
             rotate: 360,
@@ -34,7 +34,7 @@ const Index = () => {
           }}
           className="absolute top-[10%] left-[5%]"
         >
-          <Leaf className="w-16 h-16 text-primary/20" />
+          <Leaf className="w-16 h-16 text-white/20" />
         </motion.div>
         <motion.div
           animate={{
@@ -43,7 +43,7 @@ const Index = () => {
           }}
           className="absolute top-[20%] right-[10%]"
         >
-          <Wind className="w-20 h-20 text-primary/20" />
+          <Wind className="w-20 h-20 text-white/20" />
         </motion.div>
         <motion.div
           animate={{
@@ -52,7 +52,7 @@ const Index = () => {
           }}
           className="absolute bottom-[15%] left-[8%]"
         >
-          <Trees className="w-16 h-16 text-primary/20" />
+          <Trees className="w-16 h-16 text-white/20" />
         </motion.div>
         <motion.div
           animate={{
@@ -61,12 +61,12 @@ const Index = () => {
           }}
           className="absolute bottom-[20%] right-[8%]"
         >
-          <Sun className="w-16 h-16 text-primary/20" />
+          <Sun className="w-16 h-16 text-white/20" />
         </motion.div>
       </div>
 
-      {/* Content Container with Glass Effect */}
-      <div className="min-h-screen relative bg-gradient-to-b from-white/95 via-white/90 to-white/95 backdrop-blur-sm">
+      {/* Content Container with Enhanced Glass Effect */}
+      <div className="min-h-screen relative bg-gradient-to-b from-white/90 via-white/85 to-white/90 backdrop-blur-sm">
         <main className="container mx-auto py-12 px-4 space-y-12">
           {/* Header Section */}
           <motion.div 
