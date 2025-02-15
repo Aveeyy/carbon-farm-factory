@@ -34,12 +34,7 @@ const Index = () => {
       console.log("Inference response:", response);
       navigate("/results", { state: { inference: response } });
     } catch (error) {
-      console.error("Error during inference:", error);
-      if (error instanceof InferenceError) {
-        setErrorMsg(error.message);
-      } else {
-        setErrorMsg("An unexpected error occurred.");
-      }
+      setErrorMsg(error.message);
     }
   };
 
