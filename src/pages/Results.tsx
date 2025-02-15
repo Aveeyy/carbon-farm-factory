@@ -10,7 +10,7 @@ const Results = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-[#b6d7a8] relative overflow-hidden">
+    <div className="min-h-screen bg-[#38761d] relative overflow-hidden">
       {/* Animated Vines */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Vertical Growing Vines */}
@@ -82,7 +82,7 @@ const Results = () => {
       </div>
 
       {/* Content */}
-      <div className="min-h-screen bg-[#b6d7a8]/95 backdrop-blur-sm">
+      <div className="min-h-screen bg-[#38761d]/95 backdrop-blur-sm">
         <main className="container mx-auto py-8 px-4">
           <motion.div
             initial={{ x: -20, opacity: 0 }}
