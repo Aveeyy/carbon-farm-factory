@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import LocationInput from "@/components/LocationInput";
@@ -36,6 +37,31 @@ const Index = () => {
             src="/lovable-uploads/b4ffb657-20e3-48ea-b31d-5e455ebf1b56.png" 
             alt="Geometric Globe"
             className="w-full h-full object-contain"
+          />
+          {/* Added Spinning Globe */}
+          <motion.div
+            className="absolute inset-0 flex items-center justify-center"
+            animate={{ rotate: 360 }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          >
+            <Globe2 className="w-64 h-64 text-primary/60" />
+          </motion.div>
+          {/* Added Glowing Ring */}
+          <motion.div
+            className="absolute inset-0 rounded-full border-4 border-primary/20"
+            animate={{
+              scale: [1, 1.1, 1],
+              opacity: [0.3, 0.6, 0.3],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
           />
         </motion.div>
       </div>
