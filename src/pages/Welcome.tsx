@@ -15,6 +15,38 @@ const Welcome = () => {
 
   return (
     <div className="min-h-screen bg-[#222222] overflow-hidden relative">
+      {/* Spinning Earth Background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <motion.div 
+          className="absolute top 1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[150vh] h-[150vh] opacity-20"
+          animate={{ 
+            rotate: 360,
+          }}
+          transition={{
+            duration: 200,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          style={{
+            background: `radial-gradient(circle at center, 
+              transparent 0%,
+              transparent 40%,
+              rgba(74, 93, 79, 0.1) 40.5%,
+              rgba(74, 93, 79, 0.1) 41%,
+              transparent 41.5%,
+              transparent 43%,
+              rgba(74, 93, 79, 0.1) 43.5%,
+              rgba(74, 93, 79, 0.1) 44%,
+              transparent 44.5%,
+              transparent 46%,
+              rgba(74, 93, 79, 0.1) 46.5%,
+              rgba(74, 93, 79, 0.1) 47%,
+              transparent 47.5%
+            )`
+          }}
+        />
+      </div>
+
       {/* Animated Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Floating Leaves */}
