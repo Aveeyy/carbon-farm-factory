@@ -24,14 +24,13 @@ const ResultsView = ({ data }: ResultsViewProps) => {
 
   return (
     <div>
+      <p className="mt-4 text-lg">
+        Total Concentration: {data.total_concentration.toFixed(2)}
+      </p>
       <h2 className="text-2xl font-bold mb-4">
         Carbon Concentration Over Time
       </h2>
       <Line data={chartData} />
-      <p className="mt-4 text-lg">
-        Total Concentration:{" "}
-        <span className="font-bold">{data.total_concentration}</span>
-      </p>
     </div>
   );
 };
