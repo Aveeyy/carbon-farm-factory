@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import LocationInput from "@/components/LocationInput";
@@ -16,22 +15,11 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      {/* Background with Enhanced Overlay */}
+    <div className="min-h-screen relative overflow-hidden bg-[#222222]">
       <div 
-        className="absolute inset-0 bg-[url('/lovable-uploads/f39be7fd-607b-4fac-a198-571094cd3212.png')] bg-cover bg-center"
-        style={{
-          backgroundImage: `
-            linear-gradient(
-              rgba(74, 93, 79, 0.1),
-              rgba(74, 93, 79, 0.2)
-            ),
-            url('/lovable-uploads/f39be7fd-607b-4fac-a198-571094cd3212.png')
-          `
-        }}
+        className="absolute inset-0 bg-[url('/lovable-uploads/f39be7fd-607b-4fac-a198-571094cd3212.png')] bg-cover bg-center opacity-10"
       />
 
-      {/* Centered Globe Image with Enhanced Animation */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <motion.div
           animate={{
@@ -52,9 +40,7 @@ const Index = () => {
         </motion.div>
       </div>
 
-      {/* Enhanced Animated Icons */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Top Left */}
         <motion.div
           animate={{
             rotate: 360,
@@ -69,7 +55,6 @@ const Index = () => {
           <Leaf className="w-40 h-40 text-[#0EA5E9] opacity-50" />
         </motion.div>
 
-        {/* Top Right */}
         <motion.div
           animate={{
             y: [0, -30, 0],
@@ -85,7 +70,6 @@ const Index = () => {
           <Wind className="w-48 h-48 text-[#8B5CF6] opacity-50" />
         </motion.div>
 
-        {/* Bottom Left */}
         <motion.div
           animate={{
             scale: [1, 1.2, 1],
@@ -101,7 +85,6 @@ const Index = () => {
           <Trees className="w-40 h-40 text-[#D946EF] opacity-50" />
         </motion.div>
 
-        {/* Bottom Right */}
         <motion.div
           animate={{
             rotate: [0, 360],
@@ -117,37 +100,33 @@ const Index = () => {
         </motion.div>
       </div>
 
-      {/* Content Container with Enhanced Glass Effect */}
-      <div className="min-h-screen relative bg-gradient-to-b from-white/90 via-white/85 to-white/90 backdrop-blur-sm">
+      <div className="min-h-screen relative backdrop-blur-sm">
         <main className="container mx-auto py-16 px-4 space-y-16">
-          {/* Enhanced Header Section */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="text-center space-y-10"
           >
-            <h1 className="text-6xl md:text-8xl font-extrabold text-earthtone-700 tracking-tight leading-tight">
+            <h1 className="text-6xl md:text-8xl font-extrabold text-white tracking-tight leading-tight">
               Estimate Your{" "}
               <span className="bg-gradient-to-r from-primary via-earthtone-400 to-primary bg-clip-text text-transparent">
                 Carbon Impact
               </span>
             </h1>
-            <p className="text-xl md:text-2xl text-earthtone-600 max-w-4xl mx-auto leading-relaxed font-medium">
+            <p className="text-xl md:text-2xl text-earthtone-200 max-w-4xl mx-auto leading-relaxed font-medium">
               Enter your farm's details to estimate carbon capture potential and explore financial
               compensation from carbon removal projects.
             </p>
           </motion.div>
 
-          {/* Enhanced Form Container */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="max-w-5xl mx-auto"
           >
-            <div className="bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl p-10 space-y-12 border border-white/30">
-              {/* Input Grid with Enhanced Spacing */}
+            <div className="bg-[#F2FCE2] backdrop-blur-md rounded-3xl shadow-2xl p-10 space-y-12 border border-white/30">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <LocationInput />
                 <FeedstockInput />
@@ -155,7 +134,6 @@ const Index = () => {
                 <TimeWindowInput />
               </div>
               
-              {/* Enhanced CTA Button */}
               <motion.div 
                 className="flex justify-center pt-8"
                 whileHover={{ scale: 1.02 }}
