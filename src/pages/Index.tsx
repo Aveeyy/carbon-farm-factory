@@ -6,7 +6,7 @@ import FeedstockInput from "@/components/FeedstockInput";
 import AreaInput from "@/components/AreaInput";
 import TimeWindowInput from "@/components/TimeWindowInput";
 import { motion } from "framer-motion";
-import { Leaf, Wind, Trees, Sun, Sprout, Globe2 } from "lucide-react";
+import { Leaf, Wind, Trees, Sun, Sprout } from "lucide-react";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -33,14 +33,20 @@ const Index = () => {
           }}
           className="relative w-[500px] h-[500px] opacity-25"
         >
-          <img 
-            src="/lovable-uploads/b4ffb657-20e3-48ea-b31d-5e455ebf1b56.png" 
-            alt="Geometric Globe"
-            className="w-full h-full object-contain"
+          {/* Base Globe Layer */}
+          <motion.div 
+            className="absolute inset-0 rounded-full bg-gradient-to-br from-[#1E88E5] to-[#1565C0] opacity-80"
+            animate={{ rotate: 360 }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "linear"
+            }}
           />
-          {/* Added Spinning Globe */}
+          
+          {/* Continents Layer */}
           <motion.div
-            className="absolute inset-0 flex items-center justify-center"
+            className="absolute inset-0"
             animate={{ rotate: 360 }}
             transition={{
               duration: 20,
@@ -48,14 +54,59 @@ const Index = () => {
               ease: "linear"
             }}
           >
-            <Globe2 className="w-64 h-64 text-primary/60" />
+            <img 
+              src="/lovable-uploads/b4ffb657-20e3-48ea-b31d-5e455ebf1b56.png" 
+              alt="Geometric Globe"
+              className="w-full h-full object-contain opacity-60"
+            />
           </motion.div>
-          {/* Added Glowing Ring */}
+
+          {/* Cloud Layer */}
           <motion.div
-            className="absolute inset-0 rounded-full border-4 border-primary/20"
+            className="absolute inset-0 rounded-full"
+            style={{
+              background: `radial-gradient(circle at center,
+                transparent 30%,
+                rgba(255, 255, 255, 0.1) 40%,
+                transparent 50%,
+                rgba(255, 255, 255, 0.1) 60%,
+                transparent 70%
+              )`
+            }}
+            animate={{ rotate: -360 }}
+            transition={{
+              duration: 15,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          />
+
+          {/* Atmosphere Glow */}
+          <motion.div
+            className="absolute -inset-4 rounded-full"
+            style={{
+              background: `radial-gradient(circle at center,
+                rgba(74, 93, 79, 0.2) 0%,
+                transparent 70%
+              )`
+            }}
             animate={{
               scale: [1, 1.1, 1],
-              opacity: [0.3, 0.6, 0.3],
+              opacity: [0.5, 0.8, 0.5],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+
+          {/* Highlight Ring */}
+          <motion.div
+            className="absolute inset-0 rounded-full border-2 border-white/20"
+            animate={{
+              scale: [1, 1.1, 1],
+              opacity: [0.2, 0.4, 0.2],
             }}
             transition={{
               duration: 4,
