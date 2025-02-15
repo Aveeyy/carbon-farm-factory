@@ -31,7 +31,7 @@ const Index = () => {
             rotate: { duration: 40, repeat: Infinity, ease: "linear" },
             scale: { duration: 4, repeat: Infinity, ease: "easeInOut" }
           }}
-          className="relative w-[500px] h-[500px] opacity-25"
+          className="relative w-[300px] h-[300px] opacity-90"
         >
           {/* Base Globe Layer */}
           <motion.div 
