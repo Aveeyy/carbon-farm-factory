@@ -11,9 +11,25 @@ import TimeWindowInput from "@/components/TimeWindowInput";
 import Loading from "./Loading";
 import Results from "./Results";
 
-const Index = () => {
-  const navigate = useNavigate();
+const convertAcresToMeters = (acres: number) => acres * 4046.86;
+const convertHectaresToMeters = (hectares: number) => hectares * 10000;
+const convertToSquareMeters = (value: string, unit: string) => {
+  const numericValue = parseFloat(value);
+  if (isNaN(numericValue)) return 0;
 
+  switch (unit) {
+    case "acres":
+      return convertAcresToMeters(numericValue);
+    case "hectares":
+      return convertHectaresToMeters(numericValue);
+    case "m2":
+      return numericValue;
+    default:
+      return 0;
+  }
+};
+
+const Index = () => {
   const [address, setAddress] = useState("");
   const [feedstock, setFeedstock] = useState("");
   const [area, setArea] = useState("");
@@ -24,11 +40,18 @@ const Index = () => {
   const [inference, setInference] = useState(null);
 
   const handleCalculate = async () => {
+    if (!address || !feedstock || !area || !years) {
+      setErrorMsg(
+        "Please fill out all fields to calculate your carbon impact."
+      );
+      return;
+    }
+    const updatedArea = convertToSquareMeters(area, unit);
     const request = {
       address,
       temperature: 20,
       feed_stock_type: feedstock,
-      area: parseFloat(area) || 0,
+      area: updatedArea,
       time_period: parseInt(years) || 0,
     };
 

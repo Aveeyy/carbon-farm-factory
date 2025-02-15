@@ -1,7 +1,8 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Card, CardContent } from "@/components/ui/card";
 import ResultsView from "@/components/ResultsView";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, MessageSquare } from "lucide-react";
 import { motion } from "framer-motion";
 import InferenceResponse from "@/types/InferenceResponse";
 
@@ -26,7 +27,6 @@ const Results = ({ inference, onReset }: ResultsProps) => {
 
   return (
     <div className="min-h-screen bg-[#f3f8f1] relative overflow-hidden">
-      {/* [Your animated background and other UI elements] */}
       <div className="min-h-screen bg-[#f3f8f1]/95 backdrop-blur-sm">
         <main className="container mx-auto py-8 px-4">
           <motion.div
@@ -54,7 +54,6 @@ const Results = ({ inference, onReset }: ResultsProps) => {
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              {/* Pass the API response to the ResultsView */}
               <ResultsView data={inference} />
             </motion.div>
             <motion.div
@@ -63,8 +62,29 @@ const Results = ({ inference, onReset }: ResultsProps) => {
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              {/* [Your Carbon Buddy Card content] */}
-              {/* ... */}
+              <Card className="h-full bg-earthtone-900/50 border-primary/20">
+                <CardContent className="p-4">
+                  <div className="flex items-center space-x-2 mb-4 text-earthtone-300">
+                    <MessageSquare className="h-5 w-5" />
+                    <h2 className="font-semibold">Carbon Buddy</h2>
+                  </div>
+                  <div className="bg-earthtone-800/50 rounded-lg p-4 mb-4">
+                    <p className="text-sm text-earthtone-300">
+                      Hi! I'm your Carbon Buddy. Need help understanding your
+                      results or looking for ways to improve your carbon capture
+                      potential?
+                    </p>
+                  </div>
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <Button className="w-full bg-primary hover:bg-primary/90 text-white">
+                      Chat with Carbon Buddy
+                    </Button>
+                  </motion.div>
+                </CardContent>
+              </Card>
             </motion.div>
           </div>
         </main>
