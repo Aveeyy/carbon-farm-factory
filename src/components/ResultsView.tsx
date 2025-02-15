@@ -13,7 +13,7 @@ const ResultsView = ({ data }: ResultsViewProps) => {
     labels: labels,
     datasets: [
       {
-        label: "Carbon Concentration Over Time",
+        label: "Total Carbon Mass Captured Over Time",
         data: data.concentration_ts,
         fill: false,
         borderColor: "#4CAF50",
@@ -25,10 +25,10 @@ const ResultsView = ({ data }: ResultsViewProps) => {
   return (
     <div>
       <p className="mt-4 text-lg">
-        Total Concentration: {data.total_concentration.toFixed(2)}
+        Total Carbon Mass Captured: {data.total_concentration.toFixed(2)} kg
       </p>
       <h2 className="text-2xl font-bold mb-4">
-        Carbon Concentration Over Time
+        Total Carbon Mass Captured Over Time
       </h2>
       <Line data={chartData} />
     </div>
