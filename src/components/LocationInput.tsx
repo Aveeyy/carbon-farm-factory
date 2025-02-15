@@ -4,17 +4,26 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { MapPin } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const LocationInput = () => {
   const [location, setLocation] = useState("");
   const [map, setMap] = useState<google.maps.Map | null>(null);
   const [marker, setMarker] = useState<google.maps.Marker | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const mapRef = useRef<HTMLDivElement>(null);
   const autocompleteRef = useRef<google.maps.places.Autocomplete | null>(null);
 
   useEffect(() => {
+    // Check if Google Maps API is loaded
+    if (typeof google === "undefined") {
+      console.error("Google Maps API not loaded");
+      return;
+    }
+
     // Initialize the map
     if (mapRef.current && !map) {
+      setIsLoading(false);
       const initialMap = new google.maps.Map(mapRef.current, {
         center: { lat: 0, lng: 0 },
         zoom: 2,
@@ -82,7 +91,11 @@ const LocationInput = () => {
             />
             <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-earthtone-400 w-4 h-4" />
           </div>
-          <div ref={mapRef} className="w-full h-[200px] rounded-lg overflow-hidden shadow-md" />
+          {isLoading ? (
+            <Skeleton className="w-full h-[200px] rounded-lg" />
+          ) : (
+            <div ref={mapRef} className="w-full h-[200px] rounded-lg overflow-hidden shadow-md" />
+          )}
         </div>
       </CardContent>
     </Card>
