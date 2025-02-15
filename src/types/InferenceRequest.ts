@@ -5,3 +5,5 @@ interface InferenceRequest {
   area: number;
   time_period: number;
 }
+
+export default InferenceRequest;

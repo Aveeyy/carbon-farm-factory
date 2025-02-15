@@ -1,5 +1,3 @@
-
-import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Select,
@@ -10,7 +8,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { Leaf, Trees, Factory, Sprout } from "lucide-react";
+import { Sprout, Factory, Leaf, Trees } from "lucide-react";
+
+interface FeedstockInputProps {
+  value: string;
+  onChange: (value: string) => void;
+}
 
 const feedstockOptions = [
   { value: "crop_residue", label: "Crop Residue", icon: Sprout },
@@ -19,9 +22,7 @@ const feedstockOptions = [
   { value: "wood_waste", label: "Wood Waste", icon: Trees },
 ];
 
-const FeedstockInput = () => {
-  const [feedstock, setFeedstock] = useState("");
-
+const FeedstockInput = ({ value, onChange }: FeedstockInputProps) => {
   return (
     <Card className="w-full">
       <CardContent className="pt-6">
@@ -29,8 +30,11 @@ const FeedstockInput = () => {
           <Label htmlFor="feedstock" className="text-sm font-medium">
             Feedstock Material
           </Label>
-          <Select value={feedstock} onValueChange={setFeedstock}>
-            <SelectTrigger id="feedstock" className="bg-white border-earthtone-200 hover:border-primary/80 transition-colors">
+          <Select value={value} onValueChange={onChange}>
+            <SelectTrigger
+              id="feedstock"
+              className="bg-white border-earthtone-200 hover:border-primary/80 transition-colors"
+            >
               <SelectValue placeholder="Select feedstock type" />
             </SelectTrigger>
             <SelectContent>

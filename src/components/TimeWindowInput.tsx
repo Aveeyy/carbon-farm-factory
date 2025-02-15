@@ -1,18 +1,19 @@
-
-import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Clock } from "lucide-react";
 
-const TimeWindowInput = () => {
-  const [years, setYears] = useState<string>("");
+interface TimeWindowInputProps {
+  value: string;
+  onChange: (value: string) => void;
+}
 
+const TimeWindowInput = ({ value, onChange }: TimeWindowInputProps) => {
   const handleYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // Only allow positive numbers
-    const value = e.target.value;
-    if (value === "" || /^\d+$/.test(value)) {
-      setYears(value);
+    // Only allow positive numbers or an empty string
+    const val = e.target.value;
+    if (val === "" || /^\d+$/.test(val)) {
+      onChange(val);
     }
   };
 
@@ -27,7 +28,7 @@ const TimeWindowInput = () => {
           <div className="relative">
             <Input
               type="text"
-              value={years}
+              value={value}
               onChange={handleYearChange}
               placeholder="Enter number of years"
               className="bg-white border-earthtone-200 focus:border-primary"

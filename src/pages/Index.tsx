@@ -1,192 +1,53 @@
-
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { Sprout } from "lucide-react";
+import { getInference, InferenceError } from "@/api/lib/inference";
 import LocationInput from "@/components/LocationInput";
 import FeedstockInput from "@/components/FeedstockInput";
 import AreaInput from "@/components/AreaInput";
 import TimeWindowInput from "@/components/TimeWindowInput";
-import { motion } from "framer-motion";
-import { Leaf, Wind, Trees, Sun, Sprout } from "lucide-react";
 
 const Index = () => {
   const navigate = useNavigate();
 
-  const handleCalculate = () => {
-    navigate("/loading");
+  const [address, setAddress] = useState("");
+  const [feedstock, setFeedstock] = useState("");
+  const [area, setArea] = useState("");
+  const [unit, setUnit] = useState("acres");
+  const [years, setYears] = useState("");
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  const handleCalculate = async () => {
+    const request = {
+      address,
+      temperature: 20,
+      feed_stock_type: feedstock,
+      area: parseFloat(area) || 0,
+      time_period: parseInt(years) || 0,
+    };
+
+    try {
+      navigate("/loading");
+      const response = await getInference(request);
+      console.log("Inference response:", response);
+      navigate("/results", { state: { inference: response } });
+    } catch (error) {
+      console.error("Error during inference:", error);
+      if (error instanceof InferenceError) {
+        setErrorMsg(error.message);
+      } else {
+        setErrorMsg("An unexpected error occurred.");
+      }
+    }
   };
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-[#222222]">
-      <div 
-        className="absolute inset-0 bg-[url('/lovable-uploads/f39be7fd-607b-4fac-a198-571094cd3212.png')] bg-cover bg-center opacity-10"
-      />
-
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <motion.div
-          animate={{
-            rotate: 360,
-            scale: [1, 1.05, 1],
-          }}
-          transition={{
-            rotate: { duration: 40, repeat: Infinity, ease: "linear" },
-            scale: { duration: 4, repeat: Infinity, ease: "easeInOut" }
-          }}
-          className="relative w-[300px] h-[300px] opacity-90"
-        >
-          {/* Base Globe Layer */}
-          <motion.div 
-            className="absolute inset-0 rounded-full"
-            style={{
-              background: `radial-gradient(circle at center,
-                #FFFFFF 0%,
-                #1E88E5 40%,
-                #1565C0 100%
-              )`
-            }}
-            animate={{ rotate: 360 }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-          />
-          
-          {/* Continents Layer */}
-          <motion.div
-            className="absolute inset-0"
-            animate={{ rotate: 360 }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-          >
-            <img 
-              src="/lovable-uploads/b4ffb657-20e3-48ea-b31d-5e455ebf1b56.png" 
-              alt="Geometric Globe"
-              className="w-full h-full object-contain opacity-60"
-            />
-          </motion.div>
-
-          {/* Cloud Layer */}
-          <motion.div
-            className="absolute inset-0 rounded-full"
-            style={{
-              background: `radial-gradient(circle at center,
-                transparent 30%,
-                rgba(255, 255, 255, 0.1) 40%,
-                transparent 50%,
-                rgba(255, 255, 255, 0.1) 60%,
-                transparent 70%
-              )`
-            }}
-            animate={{ rotate: -360 }}
-            transition={{
-              duration: 15,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-          />
-
-          {/* Atmosphere Glow */}
-          <motion.div
-            className="absolute -inset-4 rounded-full"
-            style={{
-              background: `radial-gradient(circle at center,
-                rgba(74, 93, 79, 0.2) 0%,
-                transparent 70%
-              )`
-            }}
-            animate={{
-              scale: [1, 1.1, 1],
-              opacity: [0.5, 0.8, 0.5],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-
-          {/* Highlight Ring */}
-          <motion.div
-            className="absolute inset-0 rounded-full border-2 border-white/20"
-            animate={{
-              scale: [1, 1.1, 1],
-              opacity: [0.2, 0.4, 0.2],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-        </motion.div>
-      </div>
-
-      <div className="absolute inset-0 pointer-events-none">
-        <motion.div
-          animate={{
-            rotate: 360,
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-            scale: { duration: 3, repeat: Infinity, ease: "easeInOut" }
-          }}
-          className="absolute top-[15%] left-[15%]"
-        >
-          <Leaf className="w-40 h-40 text-[#0EA5E9] opacity-50" />
-        </motion.div>
-
-        <motion.div
-          animate={{
-            y: [0, -30, 0],
-            rotate: [-10, 10, -10],
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          className="absolute top-[20%] right-[15%]"
-        >
-          <Wind className="w-48 h-48 text-[#8B5CF6] opacity-50" />
-        </motion.div>
-
-        <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            rotate: [-5, 5, -5],
-          }}
-          transition={{
-            duration: 5,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          className="absolute bottom-[20%] left-[15%]"
-        >
-          <Trees className="w-40 h-40 text-[#D946EF] opacity-50" />
-        </motion.div>
-
-        <motion.div
-          animate={{
-            rotate: [0, 360],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            rotate: { duration: 30, repeat: Infinity, ease: "linear" },
-            scale: { duration: 4, repeat: Infinity, ease: "easeInOut" }
-          }}
-          className="absolute bottom-[25%] right-[15%]"
-        >
-          <Sun className="w-40 h-40 text-[#F97316] opacity-50" />
-        </motion.div>
-      </div>
-
       <div className="min-h-screen relative backdrop-blur-sm">
         <main className="container mx-auto py-16 px-4 space-y-16">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -199,12 +60,12 @@ const Index = () => {
               </span>
             </h1>
             <p className="text-xl md:text-2xl text-earthtone-200 max-w-4xl mx-auto leading-relaxed font-medium">
-              Enter your farm's details to estimate carbon capture potential and explore financial
-              compensation from carbon removal projects.
+              Enter your farm's details to estimate carbon capture potential and
+              explore financial compensation from carbon removal projects.
             </p>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -212,13 +73,24 @@ const Index = () => {
           >
             <div className="bg-[#F2FCE2] backdrop-blur-md rounded-3xl shadow-2xl p-10 space-y-12 border border-white/30">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                <LocationInput />
-                <FeedstockInput />
-                <AreaInput />
-                <TimeWindowInput />
+                <LocationInput value={address} onChange={setAddress} />
+                <FeedstockInput value={feedstock} onChange={setFeedstock} />
+                <AreaInput
+                  value={area}
+                  onChange={setArea}
+                  unit={unit}
+                  onUnitChange={setUnit}
+                />
+                <TimeWindowInput value={years} onChange={setYears} />
               </div>
-              
-              <motion.div 
+
+              {errorMsg && (
+                <p className="text-red-600 text-center font-semibold">
+                  {errorMsg}
+                </p>
+              )}
+
+              <motion.div
                 className="flex justify-center pt-8"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
