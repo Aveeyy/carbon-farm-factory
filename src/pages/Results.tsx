@@ -9,9 +9,10 @@ import InferenceResponse from "@/types/InferenceResponse";
 interface ResultsProps {
   inference: InferenceResponse | null;
   onReset: () => void;
+  years: string;
 }
 
-const Results = ({ inference, onReset }: ResultsProps) => {
+const Results = ({ inference, onReset, years }: ResultsProps) => {
   const navigate = useNavigate();
 
   if (!inference) {
@@ -54,7 +55,7 @@ const Results = ({ inference, onReset }: ResultsProps) => {
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <ResultsView data={inference} />
+              <ResultsView data={inference} years={parseInt(years)} />
             </motion.div>
             <motion.div
               className="lg:col-span-1"

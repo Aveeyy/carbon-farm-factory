@@ -81,7 +81,9 @@ const Index = () => {
   }
 
   if (inference) {
-    return <Results inference={inference} onReset={handleReset} />;
+    return (
+      <Results inference={inference} onReset={handleReset} years={years} />
+    );
   }
 
   return (
