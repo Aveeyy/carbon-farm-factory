@@ -60,9 +60,12 @@ const Index = () => {
                 <Button
                   size="lg"
                   onClick={handleCalculate}
-                  className="bg-primary hover:bg-primary/90 text-white px-12 py-8 text-xl rounded-full transform transition-all hover:scale-105 hover:shadow-lg"
+                  className="bg-primary hover:bg-primary/90 text-white px-12 py-8 text-xl rounded-full transform transition-all hover:scale-105 hover:shadow-lg group"
                 >
-                  Calculate Your Carbon Impact
+                  <span className="inline-flex items-center gap-2">
+                    Calculate Your Carbon Impact
+                    <Leaf className="w-5 h-5 transition-transform group-hover:rotate-45" />
+                  </span>
                 </Button>
               </div>
             </div>

@@ -10,6 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { MapIcon } from "lucide-react";
 
 const AreaInput = () => {
   const [area, setArea] = useState("");
@@ -19,7 +20,8 @@ const AreaInput = () => {
     <Card className="w-full">
       <CardContent className="pt-6">
         <div className="space-y-2">
-          <Label htmlFor="area" className="text-sm font-medium">
+          <Label htmlFor="area" className="text-sm font-medium flex items-center gap-2">
+            <MapIcon className="w-4 h-4 text-primary/60" />
             Farm Area
           </Label>
           <div className="flex space-x-2">
@@ -29,10 +31,10 @@ const AreaInput = () => {
               placeholder="Enter size"
               value={area}
               onChange={(e) => setArea(e.target.value)}
-              className="bg-white border-earthtone-200"
+              className="bg-white border-earthtone-200 hover:border-primary/80 transition-colors"
             />
             <Select value={unit} onValueChange={setUnit}>
-              <SelectTrigger className="w-[120px] bg-white border-earthtone-200">
+              <SelectTrigger className="w-[120px] bg-white border-earthtone-200 hover:border-primary/80 transition-colors">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>

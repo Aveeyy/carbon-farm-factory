@@ -9,7 +9,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, Clock } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 
@@ -20,13 +20,16 @@ const TimeWindowInput = () => {
     <Card className="w-full">
       <CardContent className="pt-6">
         <div className="space-y-2">
-          <Label className="text-sm font-medium">Time Window</Label>
+          <Label className="text-sm font-medium flex items-center gap-2">
+            <Clock className="w-4 h-4 text-primary/60" />
+            Time Window
+          </Label>
           <Popover>
             <PopoverTrigger asChild>
               <Button
                 variant="outline"
                 className={cn(
-                  "w-full justify-start text-left font-normal bg-white border-earthtone-200",
+                  "w-full justify-start text-left font-normal bg-white border-earthtone-200 hover:border-primary/80 transition-colors",
                   !date && "text-muted-foreground"
                 )}
               >
