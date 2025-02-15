@@ -16,6 +16,8 @@ const ResultsView = ({ data, years }: ResultsViewProps) => {
     return "";
   });
 
+  const carbonPriceCalifornia = 38.59; // USD per tonne
+
   const chartData = {
     labels: labels,
     datasets: [
@@ -68,6 +70,11 @@ const ResultsView = ({ data, years }: ResultsViewProps) => {
     <div className="w-full">
       <p className="mt-4 text-lg">
         Total Carbon Mass Captured: {data.total_concentration.toFixed(2)} kg
+      </p>
+      <p>Current Price of Carbon in California: $38.59</p>
+      <p>
+        Current value of Captured Carbon:{" $"}
+        {((data.total_concentration * carbonPriceCalifornia) / 1000).toFixed(2)}
       </p>
       <h2 className="text-2xl font-bold mb-4">
         Total Carbon Mass Captured Over Time
