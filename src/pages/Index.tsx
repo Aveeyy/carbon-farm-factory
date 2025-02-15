@@ -6,7 +6,7 @@ import FeedstockInput from "@/components/FeedstockInput";
 import AreaInput from "@/components/AreaInput";
 import TimeWindowInput from "@/components/TimeWindowInput";
 import { motion } from "framer-motion";
-import { Leaf, Wind, Trees, Sun, Sprout } from "lucide-react";
+import { Leaf, Wind, Trees, Sun, Sprout, Globe2 } from "lucide-react";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      {/* New Banner Image with Dynamic Overlay */}
+      {/* Background with Overlay */}
       <div 
         className="absolute inset-0 bg-[url('/lovable-uploads/f39be7fd-607b-4fac-a198-571094cd3212.png')] bg-cover bg-center"
         style={{
@@ -25,43 +25,89 @@ const Index = () => {
         }}
       />
 
-      {/* Animated Elements */}
-      <div className="absolute inset-0 pointer-events-none">
+      {/* Centered Globe Image */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <motion.div
           animate={{
             rotate: 360,
-            transition: { duration: 20, repeat: Infinity, ease: "linear" }
+            scale: [1, 1.05, 1],
           }}
-          className="absolute top-[10%] left-[5%]"
+          transition={{
+            rotate: { duration: 40, repeat: Infinity, ease: "linear" },
+            scale: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+          }}
+          className="relative w-[400px] h-[400px] opacity-20"
         >
-          <Leaf className="w-16 h-16 text-white/20" />
+          <img 
+            src="/lovable-uploads/b4ffb657-20e3-48ea-b31d-5e455ebf1b56.png" 
+            alt="Geometric Globe"
+            className="w-full h-full object-contain"
+          />
         </motion.div>
+      </div>
+
+      {/* Animated Icons with Enhanced Visibility */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Top Left */}
         <motion.div
           animate={{
-            y: [0, -20, 0],
-            transition: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+            rotate: 360,
+            scale: [1, 1.2, 1],
           }}
-          className="absolute top-[20%] right-[10%]"
+          transition={{
+            rotate: { duration: 20, repeat: Infinity, ease: "linear" },
+            scale: { duration: 3, repeat: Infinity, ease: "easeInOut" }
+          }}
+          className="absolute top-[15%] left-[15%]"
         >
-          <Wind className="w-20 h-20 text-white/20" />
+          <Leaf className="w-32 h-32 text-[#0EA5E9] opacity-40" />
         </motion.div>
+
+        {/* Top Right */}
         <motion.div
           animate={{
-            scale: [1, 1.1, 1],
-            transition: { duration: 5, repeat: Infinity, ease: "easeInOut" }
+            y: [0, -30, 0],
+            rotate: [-10, 10, -10],
           }}
-          className="absolute bottom-[15%] left-[8%]"
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="absolute top-[20%] right-[15%]"
         >
-          <Trees className="w-16 h-16 text-white/20" />
+          <Wind className="w-40 h-40 text-[#8B5CF6] opacity-40" />
         </motion.div>
+
+        {/* Bottom Left */}
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            rotate: [-5, 5, -5],
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="absolute bottom-[20%] left-[15%]"
+        >
+          <Trees className="w-32 h-32 text-[#D946EF] opacity-40" />
+        </motion.div>
+
+        {/* Bottom Right */}
         <motion.div
           animate={{
             rotate: [0, 360],
-            transition: { duration: 30, repeat: Infinity, ease: "linear" }
+            scale: [1, 1.1, 1],
           }}
-          className="absolute bottom-[20%] right-[8%]"
+          transition={{
+            rotate: { duration: 30, repeat: Infinity, ease: "linear" },
+            scale: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+          }}
+          className="absolute bottom-[25%] right-[15%]"
         >
-          <Sun className="w-16 h-16 text-white/20" />
+          <Sun className="w-32 h-32 text-[#F97316] opacity-40" />
         </motion.div>
       </div>
 
