@@ -6,7 +6,7 @@ import FeedstockInput from "@/components/FeedstockInput";
 import AreaInput from "@/components/AreaInput";
 import TimeWindowInput from "@/components/TimeWindowInput";
 import { motion } from "framer-motion";
-import { Leaf, Wind, Tree, Sun } from "lucide-react";
+import { Leaf, Wind, Trees, Sun } from "lucide-react";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ const Index = () => {
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <Leaf className="absolute top-[10%] left-[5%] w-16 h-16 text-primary/20 animate-spin-slow" />
         <Wind className="absolute top-[20%] right-[10%] w-20 h-20 text-primary/20" />
-        <Tree className="absolute bottom-[15%] left-[8%] w-16 h-16 text-primary/20" />
+        <Trees className="absolute bottom-[15%] left-[8%] w-16 h-16 text-primary/20" />
         <Sun className="absolute bottom-[20%] right-[8%] w-16 h-16 text-primary/20" />
       </div>
 
