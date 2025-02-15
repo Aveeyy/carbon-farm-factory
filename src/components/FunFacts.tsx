@@ -6,10 +6,12 @@ import { Leaf } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const facts = [
-  "One acre of hemp can absorb as much CO₂ as a young forest!",
-  "Soil can store three times as much carbon as the atmosphere.",
-  "Regenerative farming could offset 40% of global CO₂ emissions.",
-  "A single tree can absorb up to 48 pounds of CO₂ per year.",
+  "Converting to sustainable farming practices can reduce carbon emissions by up to 170%!",
+  "Regenerative agriculture could offset all current global CO2 emissions!",
+  "Cover crops can sequester up to 3 tons of CO2 per acre annually.",
+  "Soil organic matter has decreased by 50% in the last century due to intensive farming.",
+  "Sustainable farming practices can increase crop yields by 20% or more!",
+  "One acre of regenerative farmland can offset the annual emissions of 2 cars.",
 ];
 
 const FunFacts = () => {
