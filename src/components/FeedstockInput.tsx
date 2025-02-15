@@ -10,13 +10,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { Leaf, Tree, Factory, Grain } from "lucide-react";
+import { Leaf, Trees, Factory, Sprout } from "lucide-react";
 
 const feedstockOptions = [
-  { value: "crop_residue", label: "Crop Residue", icon: Grain },
+  { value: "crop_residue", label: "Crop Residue", icon: Sprout },
   { value: "manure", label: "Manure", icon: Factory },
   { value: "green_waste", label: "Green Waste", icon: Leaf },
-  { value: "wood_waste", label: "Wood Waste", icon: Tree },
+  { value: "wood_waste", label: "Wood Waste", icon: Trees },
 ];
 
 const FeedstockInput = () => {
