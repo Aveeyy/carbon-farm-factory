@@ -30,7 +30,7 @@ const Index = () => {
           <div className="max-w-4xl mx-auto space-y-6 animate-fade-in">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <LocationInput />
-              <FeedstoodInput />
+              <FeedstockInput />
               <AreaInput />
               <TimeWindowInput />
             </div>
