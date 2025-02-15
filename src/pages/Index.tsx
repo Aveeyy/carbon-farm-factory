@@ -49,7 +49,6 @@ const Index = () => {
     const updatedArea = convertToSquareMeters(area, unit);
     const request = {
       address,
-      temperature: 20,
       feed_stock_type: feedstock,
       area: updatedArea,
       time_period: parseInt(years) || 0,
