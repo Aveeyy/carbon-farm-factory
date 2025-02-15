@@ -17,15 +17,21 @@ const Index = () => {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      {/* Background with Overlay */}
+      {/* Background with Enhanced Overlay */}
       <div 
         className="absolute inset-0 bg-[url('/lovable-uploads/f39be7fd-607b-4fac-a198-571094cd3212.png')] bg-cover bg-center"
         style={{
-          backgroundImage: `linear-gradient(rgba(74, 93, 79, 0.1), rgba(74, 93, 79, 0.2)), url('/lovable-uploads/f39be7fd-607b-4fac-a198-571094cd3212.png')`
+          backgroundImage: `
+            linear-gradient(
+              rgba(74, 93, 79, 0.1),
+              rgba(74, 93, 79, 0.2)
+            ),
+            url('/lovable-uploads/f39be7fd-607b-4fac-a198-571094cd3212.png')
+          `
         }}
       />
 
-      {/* Centered Globe Image */}
+      {/* Centered Globe Image with Enhanced Animation */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <motion.div
           animate={{
@@ -36,7 +42,7 @@ const Index = () => {
             rotate: { duration: 40, repeat: Infinity, ease: "linear" },
             scale: { duration: 4, repeat: Infinity, ease: "easeInOut" }
           }}
-          className="relative w-[400px] h-[400px] opacity-20"
+          className="relative w-[500px] h-[500px] opacity-25"
         >
           <img 
             src="/lovable-uploads/b4ffb657-20e3-48ea-b31d-5e455ebf1b56.png" 
@@ -46,7 +52,7 @@ const Index = () => {
         </motion.div>
       </div>
 
-      {/* Animated Icons with Enhanced Visibility */}
+      {/* Enhanced Animated Icons */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Top Left */}
         <motion.div
@@ -60,7 +66,7 @@ const Index = () => {
           }}
           className="absolute top-[15%] left-[15%]"
         >
-          <Leaf className="w-32 h-32 text-[#0EA5E9] opacity-40" />
+          <Leaf className="w-40 h-40 text-[#0EA5E9] opacity-50" />
         </motion.div>
 
         {/* Top Right */}
@@ -76,7 +82,7 @@ const Index = () => {
           }}
           className="absolute top-[20%] right-[15%]"
         >
-          <Wind className="w-40 h-40 text-[#8B5CF6] opacity-40" />
+          <Wind className="w-48 h-48 text-[#8B5CF6] opacity-50" />
         </motion.div>
 
         {/* Bottom Left */}
@@ -92,7 +98,7 @@ const Index = () => {
           }}
           className="absolute bottom-[20%] left-[15%]"
         >
-          <Trees className="w-32 h-32 text-[#D946EF] opacity-40" />
+          <Trees className="w-40 h-40 text-[#D946EF] opacity-50" />
         </motion.div>
 
         {/* Bottom Right */}
@@ -107,64 +113,64 @@ const Index = () => {
           }}
           className="absolute bottom-[25%] right-[15%]"
         >
-          <Sun className="w-32 h-32 text-[#F97316] opacity-40" />
+          <Sun className="w-40 h-40 text-[#F97316] opacity-50" />
         </motion.div>
       </div>
 
       {/* Content Container with Enhanced Glass Effect */}
       <div className="min-h-screen relative bg-gradient-to-b from-white/90 via-white/85 to-white/90 backdrop-blur-sm">
-        <main className="container mx-auto py-12 px-4 space-y-12">
-          {/* Header Section */}
+        <main className="container mx-auto py-16 px-4 space-y-16">
+          {/* Enhanced Header Section */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center space-y-8"
+            transition={{ duration: 0.8 }}
+            className="text-center space-y-10"
           >
-            <h1 className="text-5xl md:text-7xl font-bold text-earthtone-700 tracking-tight">
-              Estimate Your 
-              <span className="bg-gradient-to-r from-primary to-earthtone-400 bg-clip-text text-transparent">
-                {" "}Carbon Impact
+            <h1 className="text-6xl md:text-8xl font-extrabold text-earthtone-700 tracking-tight leading-tight">
+              Estimate Your{" "}
+              <span className="bg-gradient-to-r from-primary via-earthtone-400 to-primary bg-clip-text text-transparent">
+                Carbon Impact
               </span>
             </h1>
-            <p className="text-lg md:text-xl text-earthtone-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl text-earthtone-600 max-w-4xl mx-auto leading-relaxed font-medium">
               Enter your farm's details to estimate carbon capture potential and explore financial
               compensation from carbon removal projects.
             </p>
           </motion.div>
 
-          {/* Form Container */}
+          {/* Enhanced Form Container */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="max-w-4xl mx-auto"
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="max-w-5xl mx-auto"
           >
-            <div className="bg-white/80 backdrop-blur-md rounded-2xl shadow-xl p-8 space-y-8 border border-white/20">
-              {/* Input Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl p-10 space-y-12 border border-white/30">
+              {/* Input Grid with Enhanced Spacing */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <LocationInput />
                 <FeedstockInput />
                 <AreaInput />
                 <TimeWindowInput />
               </div>
               
-              {/* CTA Button */}
+              {/* Enhanced CTA Button */}
               <motion.div 
-                className="flex justify-center pt-6"
+                className="flex justify-center pt-8"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
                 <Button
                   size="lg"
                   onClick={handleCalculate}
-                  className="relative bg-primary hover:bg-primary/90 text-white px-12 py-8 text-xl rounded-full transform transition-all hover:shadow-lg group overflow-hidden"
+                  className="relative bg-primary hover:bg-primary/90 text-white px-16 py-8 text-2xl rounded-full transform transition-all duration-300 hover:shadow-2xl group overflow-hidden"
                 >
-                  <span className="relative z-10 inline-flex items-center gap-3">
+                  <span className="relative z-10 inline-flex items-center gap-4">
                     Calculate Your Carbon Impact
-                    <Sprout className="w-6 h-6 transition-transform group-hover:rotate-12" />
+                    <Sprout className="w-8 h-8 transition-transform duration-300 group-hover:rotate-12" />
                   </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </Button>
               </motion.div>
             </div>
