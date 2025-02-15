@@ -35,7 +35,14 @@ const Index = () => {
         >
           {/* Base Globe Layer */}
           <motion.div 
-            className="absolute inset-0 rounded-full bg-gradient-to-br from-[#1E88E5] to-[#1565C0] opacity-80"
+            className="absolute inset-0 rounded-full"
+            style={{
+              background: `radial-gradient(circle at center,
+                #FFFFFF 0%,
+                #1E88E5 40%,
+                #1565C0 100%
+              )`
+            }}
             animate={{ rotate: 360 }}
             transition={{
               duration: 20,
