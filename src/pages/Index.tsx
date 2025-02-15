@@ -8,6 +8,8 @@ import LocationInput from "@/components/LocationInput";
 import FeedstockInput from "@/components/FeedstockInput";
 import AreaInput from "@/components/AreaInput";
 import TimeWindowInput from "@/components/TimeWindowInput";
+import Loading from "./Loading";
+import Results from "./Results";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -18,6 +20,8 @@ const Index = () => {
   const [unit, setUnit] = useState("acres");
   const [years, setYears] = useState("");
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [inference, setInference] = useState(null);
 
   const handleCalculate = async () => {
     const request = {
@@ -28,15 +32,34 @@ const Index = () => {
       time_period: parseInt(years) || 0,
     };
 
+    setIsLoading(true);
+    setErrorMsg(null);
     try {
-      navigate("/loading");
       const response = await getInference(request);
-      console.log("Inference response:", response);
-      navigate("/results", { state: { inference: response } });
+      setInference(response);
     } catch (error) {
       setErrorMsg(error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  const handleReset = async () => {
+    setInference(null);
+    setErrorMsg(null);
+    setAddress("");
+    setFeedstock("");
+    setArea("");
+    setYears("");
+  };
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (inference) {
+    return <Results inference={inference} onReset={handleReset} />;
+  }
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-[#222222]">

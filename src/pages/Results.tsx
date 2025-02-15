@@ -3,11 +3,15 @@ import ResultsView from "@/components/ResultsView";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
+import InferenceResponse from "@/types/InferenceResponse";
 
-const Results = () => {
+interface ResultsProps {
+  inference: InferenceResponse | null;
+  onReset: () => void;
+}
+
+const Results = ({ inference, onReset }: ResultsProps) => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const { inference } = location.state || {};
 
   if (!inference) {
     return (
@@ -32,7 +36,10 @@ const Results = () => {
           >
             <Button
               variant="ghost"
-              onClick={() => navigate("/")}
+              onClick={() => {
+                onReset();
+                navigate("/calculator");
+              }}
               className="mb-8 text-earthtone-300 hover:text-primary"
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
