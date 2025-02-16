@@ -6,29 +6,31 @@ import { motion } from "framer-motion";
 import React from 'react';
 import SpinningGlobe from '../components/SpinningGlobe';
 import '../components/ui/styles.css';
-
-const HomePage: React.FC = () => {
-  return (
-    <div>
-      <h1>Welcome to EcoField</h1>
-      <SpinningGlobe />
-      {/* Other content */}
-    </div>
-  );
-};
+import grassImage from '../assets/grass.jpg';
 
 const Welcome: React.FC = () => {
   const navigate = useNavigate();
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-  setIsLoaded(true);
+    setIsLoaded(true);
   }, []);
 
   return (
     <div className="min-h-screen bg-white overflow-hidden relative">
-      {/* Background gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-green-50 to-green-100" />
+      {/* Background with gradient and image */}
+      <div className="absolute inset-0">
+        <div className="h-1/3 bg-gradient-to-b from-green-50 to-green-100" />
+        <div className="h-1/2 relative">
+          <img 
+            src={grassImage}
+            alt="Agricultural field rows" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-green-100/80 to-transparent" />
+          <div className="absolute inset-0 bg-black/20" />
+        </div>
+      </div>
 
       {/* Navigation */}
       <nav className="relative z-20 p-4">
@@ -78,7 +80,7 @@ const Welcome: React.FC = () => {
               </div>
 
               <motion.p 
-                className="text-2xl text-white-600"
+                className="text-2xl text-white"
                 animate={{ opacity: [0.8, 1, 0.8] }}
                 transition={{ duration: 3, repeat: Infinity }}
               >
@@ -92,7 +94,7 @@ const Welcome: React.FC = () => {
                 <Button
                   onClick={() => navigate("/calculator")}
                   size="lg"
-                  className="bg-green-600 hover:bg-green-700 text-white px-8 py-6 text-xl rounded-lg flex items-center gap-2"
+                  className="bg-earthtone-600 hover:bg-green-700 text-white px-8 py-6 text-xl rounded-lg flex items-center gap-2"
                 >
                   Ready to Start
                   <ArrowRight className="ml-2 h-6 w-6" />
