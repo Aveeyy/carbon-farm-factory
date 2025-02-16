@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Sprout } from "lucide-react";
 import { getInference, InferenceError } from "@/api/lib/inference";
@@ -49,9 +48,13 @@ const Index = () => {
     const updatedArea = convertToSquareMeters(area, unit);
     const request = {
       address,
-      feed_stock_type: feedstock,
+      feedstock_type: feedstock,
       area: updatedArea,
       time_period: parseInt(years) || 0,
+      application_rate: 2, // tonnes per hectare
+      clay_pct: 0.2,
+      silt_pct: 0.5,
+      sand_pct: 0.1,
     };
 
     setIsLoading(true);
