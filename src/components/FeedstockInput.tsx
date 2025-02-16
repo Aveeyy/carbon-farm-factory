@@ -16,10 +16,9 @@ interface FeedstockInputProps {
 }
 
 const feedstockOptions = [
-  { value: "crop_residue", label: "Crop Residue", icon: Sprout },
-  { value: "manure", label: "Manure", icon: Factory },
-  { value: "green_waste", label: "Green Waste", icon: Leaf },
-  { value: "wood_waste", label: "Wood Waste", icon: Trees },
+  { value: "basalt", label: "Basalt", icon: Sprout },
+  { value: "larnite", label: "Larnite", icon: Factory },
+  { value: "wollastonite", label: "Wollastonite", icon: Leaf },
 ];
 
 const FeedstockInput = ({ value, onChange }: FeedstockInputProps) => {
