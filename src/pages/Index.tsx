@@ -57,6 +57,7 @@ const Index = () => {
     setIsLoading(true);
     setErrorMsg(null);
     try {
+      console.log(request);
       const response = await getInference(request);
       setInference(response);
     } catch (error) {
