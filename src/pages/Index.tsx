@@ -86,7 +86,7 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-[#222222]">
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-b from-[#a8d08d] via-[#3d5c3c] to-[#000000]]">
       <div className="min-h-screen relative backdrop-blur-sm">
         <main className="container mx-auto py-16 px-4 space-y-16">
           <motion.div
