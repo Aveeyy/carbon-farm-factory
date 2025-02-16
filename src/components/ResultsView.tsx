@@ -15,7 +15,7 @@ const ResultsView = ({ data, years }: ResultsViewProps) => {
     return "";
   });
 
-  const carbonPriceCalifornia = 38.59; // USD per tonne
+  const carbonPriceCalifornia = 340; // USD per tonne
 
   const chartData = {
     labels: labels,
@@ -29,7 +29,6 @@ const ResultsView = ({ data, years }: ResultsViewProps) => {
       },
     ],
   };
-
 
   const options = {
     scales: {
@@ -66,7 +65,6 @@ const ResultsView = ({ data, years }: ResultsViewProps) => {
     backgroundColor: "white",
   };
 
-
   return (
     <div className="w-full px-8 py-6 bg-gradient-to-b from-earthtone-800 via-green-600 to-green-300">
       {/* Overview Card Section */}
@@ -79,20 +77,32 @@ const ResultsView = ({ data, years }: ResultsViewProps) => {
         </div>
 
         <div className="bg-white p-6 rounded-lg shadow-lg">
-          <p className="text-lg font-semibold">Current Price of Carbon in California</p>
-          <p className="text-2xl font-semibold text-gray-700">${carbonPriceCalifornia.toFixed(2)}</p>
+          <p className="text-lg font-semibold">
+            Current Price of Carbon in California
+          </p>
+          <p className="text-2xl font-semibold text-gray-700">
+            ${carbonPriceCalifornia.toFixed(2)}
+          </p>
         </div>
 
         <div className="bg-white p-6 rounded-lg shadow-lg">
-          <p className="text-lg font-semibold">Current Value of Captured Carbon</p>
+          <p className="text-lg font-semibold">
+            Current Value of Captured Carbon
+          </p>
           <p className="text-3xl font-bold text-earthtone-400">
-            ${((data.total_concentration * carbonPriceCalifornia) / 1000).toFixed(2)}
+            $
+            {(
+              (data.total_concentration * carbonPriceCalifornia) /
+              1000
+            ).toFixed(2)}
           </p>
         </div>
       </div>
 
       {/* Chart Title */}
-      <h2 className="text-2xl font-bold mb-4 text-white">Total Carbon Mass Captured Over Time</h2>
+      <h2 className="text-2xl font-bold mb-4 text-white">
+        Total Carbon Mass Captured Over Time
+      </h2>
 
       {/* Line Chart */}
       <div className="bg-white p-6 rounded-lg shadow-lg">
