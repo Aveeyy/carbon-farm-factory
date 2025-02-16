@@ -12,15 +12,16 @@ interface ResultsViewProps {
   years: number;
 }
 
-
 const ResultsView = ({ data, years }: ResultsViewProps) => {
   const [executiveSummary, setExecutiveSummary] = useState<string>("");
-  const [newsArticles, setNewsArticles] = useState<{ 
-    title: string; 
-    url: string; 
-    description: string;
-    date: string;
-  }[]>([]);
+  const [newsArticles, setNewsArticles] = useState<
+    {
+      title: string;
+      url: string;
+      description: string;
+      date: string;
+    }[]
+  >([]);
 
   const datapointsPerYear = Math.floor(data.concentration_ts.length / years);
   const labels = data.concentration_ts.map((_, i) => {
@@ -93,17 +94,17 @@ const ResultsView = ({ data, years }: ResultsViewProps) => {
         data: {
           input_file: {
             type: "crunchflow_input",
-            content: "CrunchFlow input data"
+            content: "CrunchFlow input data",
           },
           output_file: {
             type: "crunchflow_output",
             content: "CrunchFlow output results",
             results: {
               total_concentration: data.total_concentration,
-              concentration_timeline: data.concentration_ts
-            }
-          }
-        }
+              concentration_timeline: data.concentration_ts,
+            },
+          },
+        },
       };
 
       const prompt = `
@@ -120,54 +121,58 @@ const ResultsView = ({ data, years }: ResultsViewProps) => {
       `;
 
       try {
-        const response = await fetch("https://api.mistral.ai/v1/chat/completions", {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${MISTRAL_API_KEY}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            model: "ministral-8b-latest",
-            messages: [{ role: "user", content: prompt }],
-            temperature: 0.7,
-          }),
-        });
+        const response = await fetch(
+          "https://api.mistral.ai/v1/chat/completions",
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${MISTRAL_API_KEY}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              model: "ministral-8b-latest",
+              messages: [{ role: "user", content: prompt }],
+              temperature: 0.7,
+            }),
+          }
+        );
 
         const result = await response.json();
-        setExecutiveSummary(result.choices[0]?.message?.content || "Error generating summary.");
+        setExecutiveSummary(
+          result.choices[0]?.message?.content || "Error generating summary."
+        );
       } catch (error) {
         console.error("Error fetching executive summary:", error);
         setExecutiveSummary("Failed to generate summary.");
       }
     };
-
-    fetchExecutiveSummary();
-  }, []);
-
-  // Fetch Latest News (Perplexity AI)
-  useEffect(() => {
     const fetchLatestNews = async () => {
       try {
-        const response = await fetch("https://api.perplexity.ai/chat/completions", {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${PERPLEXITY_API_KEY}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            model: "sonar-pro",
-            messages: [
-              {
-                role: "system",
-                content: "You are a helpful assistant that provides news articles about carbon capture. Return only JSON in the format {articles: [{title: string, url: string, description: string, date: string}]}. For papers, do not include author names in the title or description. Make sure that the newest one is first."
-              },
-              {
-                role: "user",
-                content: "Find three recent articles about carbon removal and rock weathering, especially in farming. Look at news articles as well as papers. Especially interesting are new innovations in that area as well as government fundings and laws. For each, provide: 1) a single-sentence description that captures the key finding or announcement, 2) the publication date in 'MMM DD, YYYY' format. Return in JSON format. For papers, remove author names from both title and description. For papers, do not include author names in the title or description. Make sure that the newest one is first."
-              }
-            ]
-          }),
-        });
+        const response = await fetch(
+          "https://api.perplexity.ai/chat/completions",
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${PERPLEXITY_API_KEY}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              model: "sonar-pro",
+              messages: [
+                {
+                  role: "system",
+                  content:
+                    "You are a helpful assistant that provides news articles about carbon capture. Return only JSON in the format {articles: [{title: string, url: string, description: string, date: string}]}. For papers, do not include author names in the title or description. Make sure that the newest one is first.",
+                },
+                {
+                  role: "user",
+                  content:
+                    "Find three recent articles about carbon removal and rock weathering, especially in farming. Look at news articles as well as papers. Especially interesting are new innovations in that area as well as government fundings and laws. For each, provide: 1) a single-sentence description that captures the key finding or announcement, 2) the publication date in 'MMM DD, YYYY' format. Return in JSON format. For papers, remove author names from both title and description. For papers, do not include author names in the title or description. Make sure that the newest one is first.",
+                },
+              ],
+            }),
+          }
+        );
 
         const result = await response.json();
         const articles = JSON.parse(result.choices[0].message.content).articles;
@@ -177,73 +182,92 @@ const ResultsView = ({ data, years }: ResultsViewProps) => {
       }
     };
 
+    fetchExecutiveSummary();
     fetchLatestNews();
-  }, []);
+  }, [data.concentration_ts, data.total_concentration]);
 
   return (
-    <div className="w-full  px-8 py-6 bg-gradient-to-b from-earthtone-800 via-green-600 to-green-300">
+    <div className="w-full px-8 py-6 bg-earthtone-500">
+      {/* Overview Card Section */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+        <div className="bg-white p-6 rounded-lg shadow-lg">
+          <p className="text-lg font-semibold">Total Carbon Mass Captured</p>
+          <p className="text-3xl font-bold text-green-900">
+            {data.total_concentration.toFixed(2)} kg
+          </p>
+        </div>
+        <div className="bg-white p-6 rounded-lg shadow-lg">
+          <p className="text-lg font-semibold">
+            Current Price of Carbon in California
+          </p>
+          <p className="text-3xl font-bold text-green-900">
+            ${carbonPriceCalifornia.toFixed(2)}
+          </p>
+        </div>
+        <div className="bg-white p-6 rounded-lg shadow-lg">
+          <p className="text-lg font-semibold">
+            Current Value of Captured Carbon
+          </p>
+          <p className="text-3xl font-bold text-green-900">
+            $
+            {(
+              (data.total_concentration * carbonPriceCalifornia) /
+              1000
+            ).toFixed(2)}
+          </p>
+        </div>
+      </div>
 
-      {/* 1. Carbon Capture Results */}
-      <div className="mt-4">
-        <h2 className="text-2xl font-bold mb-4">🌱 Carbon Capture Results</h2>
-        <p className="mt-4 text-lg">
-          Total Carbon Mass Captured: {data.total_concentration.toFixed(2)} kg
-        </p>
-        <p>Current Price of Carbon in California: ${carbonPriceCalifornia}</p>
-        <p>
-          Current value of Captured Carbon:{" $"}
-          {((data.total_concentration * carbonPriceCalifornia) / 1000).toFixed(2)}
-        </p>
-        <h2 className="text-2xl font-bold mt-6">📊 Total Carbon Mass Captured Over Time</h2>
+      {/* Chart Title */}
+      <h2 className="text-2xl font-bold mb-4 text-white">
+        Total Carbon Mass Captured Over Time
+      </h2>
+
+      {/* Line Chart */}
+      <div className="bg-white p-6 rounded-lg shadow-lg">
         <Line data={chartData} options={options} />
       </div>
 
-      {/* 2. Model */}
-      <div className="mt-8 p-4 border rounded-md bg-gray-100">
-        <h2 className="text-xl font-bold">🖥️ Model Overview</h2>
-        <p>CrunchFlow simulation results and parameters will be displayed here.</p>
-      </div>
+      {/* Executive Summary & Latest News in two columns */}
+      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="p-4 border rounded-md bg-gray-100">
+          <h2 className="text-xl font-bold">📜 Executive Summary</h2>
+          <p>{executiveSummary || "Loading summary..."}</p>
+        </div>
 
-      {/* 3. Executive Summary */}
-      <div className="mt-8 p-4 border rounded-md bg-gray-100">
-        <h2 className="text-xl font-bold">📜 Executive Summary</h2>
-        <p>{executiveSummary || "Loading summary..."}</p>
-      </div>
-
-      {/* 4. Latest News */}
-      <div className="mt-8 p-4 border rounded-md bg-gray-100">
-        <h2 className="text-xl font-bold">📰 Latest News on Carbon Capture</h2>
-        {newsArticles.length > 0 ? (
-          <ul className="space-y-6 mt-4">
-            {newsArticles.map((article, index) => (
-              <li 
-                key={index}
-                className="group relative p-4 rounded-lg hover:bg-white transition-colors duration-200"
-              >
-                <a 
-                  href={article.url} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="block"
+        <div className="p-4 border rounded-md bg-gray-100">
+          <h2 className="text-xl font-bold">
+            📰 Latest News on Carbon Capture
+          </h2>
+          {newsArticles.length > 0 ? (
+            <ul className="space-y-6 mt-4">
+              {newsArticles.map((article, index) => (
+                <li
+                  key={index}
+                  className="group relative p-4 rounded-lg hover:bg-white transition-colors duration-200"
                 >
-                  <h3 className="font-semibold text-blue-600 group-hover:text-blue-800">
-                    {article.title}
-                  </h3>
-                  <p className="text-gray-500 text-xs mt-1">
-                    {article.date}
-                  </p>
-                  <p className="text-gray-600 mt-2 text-sm">
-                    {article.description}
-                  </p>
-                </a>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>Loading news...</p>
-        )}
+                  <a
+                    href={article.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block"
+                  >
+                    <h3 className="font-semibold text-blue-600 group-hover:text-blue-800">
+                      {article.title}
+                    </h3>
+                    <p className="text-gray-500 text-xs mt-1">{article.date}</p>
+                    <p className="text-gray-600 mt-2 text-sm">
+                      {article.description}
+                    </p>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>Loading news...</p>
+          )}
+        </div>
       </div>
-
     </div>
   );
 };
