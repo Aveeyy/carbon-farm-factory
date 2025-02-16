@@ -16,6 +16,7 @@ interface ResultsProps {
 const Results = ({ inference, onReset, years }: ResultsProps) => {
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [chatHistory, setChatHistory] = useState<any[]>([]); // Store chat history
   const [isChatting, setIsChatting] = useState(false); // State to track if user has started chatting
 
@@ -122,7 +123,11 @@ const Results = ({ inference, onReset, years }: ResultsProps) => {
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       className="flex-1 p-2 rounded-lg bg-white-700 text-black-300 placeholder-white-500"
-                      placeholder={isChatting ? "Type your message here..." : "Start typing..."} // Changes based on chat state
+                      placeholder={
+                        isChatting
+                          ? "Type your message here..."
+                          : "Start typing..."
+                      } // Changes based on chat state
                     />
                     <Button
                       className="text-white bg-primary hover:bg-primary/90"
