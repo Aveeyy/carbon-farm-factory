@@ -41,6 +41,7 @@ const Index = () => {
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [inference, setInference] = useState(null);
+  const [inferenceRequest, setInferenceRequest] = useState(null);
 
   const handleCalculate = async () => {
     if (!address || !feedstock || !area || !years) {
@@ -60,6 +61,7 @@ const Index = () => {
       silt_pct: siltPercentage,
       sand_pct: sandPercentage,
     };
+    setInferenceRequest(request);
 
     setIsLoading(true);
     setErrorMsg(null);
@@ -93,7 +95,12 @@ const Index = () => {
 
   if (inference) {
     return (
-      <Results inference={inference} onReset={handleReset} years={years} />
+      <Results
+        inference={inference}
+        onReset={handleReset}
+        years={years}
+        inferenceRequest={inferenceRequest}
+      />
     );
   }
 
