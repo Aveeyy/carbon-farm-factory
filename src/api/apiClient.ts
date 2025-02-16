@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from "axios";
 
-const timeout = 60000;
+const timeout = 180000;
 
 const getApiClient = (baseUrl: string) => {
   const apiClient = axios.create({

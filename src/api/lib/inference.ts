@@ -15,7 +15,7 @@ export class InferenceError extends Error {
 }
 
 const API_BASE_URL = "/inference";
-const apiClient = getApiClient("http://localhost:80");
+const apiClient = getApiClient('http://localhost:80');  // Empty base URL since we're using relative paths with proxy
 
 const handleApiError = (error: unknown, defaultMessage: string): never => {
   const message = error instanceof Error ? error.message : defaultMessage;
