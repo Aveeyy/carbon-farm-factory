@@ -1,0 +1,59 @@
+body {
+    background-color: #111;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden; /* Prevent horizontal overflow */
+}
+  
+  /* Container for the globe with perspective */
+  .globe-container {
+    perspective: 1000px; /* Adds depth to the 3D effect */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 200%;
+  }
+  
+  /* The globe element itself */
+  #earth {
+    width: 300px;
+    height: 300px;
+    background: url(https://web.archive.org/web/20150807125159if_/http://www.noirextreme.com/digital/Earth-Color4096.jpg);
+    border-radius: 50%;
+    background-size: cover; /* Ensure the image fully covers the element */
+    box-shadow: inset 8px 36px 80px 36px rgb(50, 47, 47), inset -6px 0 12px 4px rgba(255, 255, 255, 0.3);
+  
+    /* 3D effect with transform-style */
+    transform-style: preserve-3d; /* Ensures children are rendered in 3D space */
+    transform: translateX(180px);
+    
+    /* Apply spinning animation */
+    animation: rotate 12s linear infinite; /* Horizontal 3D rotation */
+  }
+  
+  /* Keyframes to rotate the globe (horizontal spin around the Y-axis) */
+  @keyframes rotate {
+    from { background-position: 0px 0px; }
+    to { background-position: 500px 0px; }
+  }
+
+  /* Add this CSS to your styles.css */
+@keyframes float {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  
+  .moving-object {
+    animation: float 5s ease-in-out infinite;
+  }
+  

@@ -77,6 +77,7 @@ const ResultsView = ({ data, years }: ResultsViewProps) => {
         </div>
 
         <div className="bg-white p-6 rounded-lg shadow-lg">
+<<<<<<< Updated upstream
           <p className="text-lg font-semibold">
             Current Price of Carbon in California
           </p>
@@ -95,6 +96,16 @@ const ResultsView = ({ data, years }: ResultsViewProps) => {
               (data.total_concentration * carbonPriceCalifornia) /
               1000
             ).toFixed(2)}
+=======
+          <p className="text-lg font-semibold">Current Price of Carbon in California</p>
+          <p className="text-3xl font-bold text-green-900">${carbonPriceCalifornia.toFixed(2)}</p>
+        </div>
+
+        <div className="bg-white p-6 rounded-lg shadow-lg">
+          <p className="text-lg font-semibold">Current Value of Captured Carbon</p>
+          <p className="text-3xl font-bold text-green-900">
+            ${((data.total_concentration * carbonPriceCalifornia) / 1000).toFixed(2)}
+>>>>>>> Stashed changes
           </p>
         </div>
       </div>

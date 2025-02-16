@@ -2,6 +2,7 @@ import FunFacts from "@/components/FunFacts";
 import { motion } from "framer-motion";
 import { Leaf, Wind, Globe2 } from "lucide-react";
 
+
 const Loading = () => {
   return (
     <div className="min-h-screen bg-earthtone-50 overflow-hidden relative">

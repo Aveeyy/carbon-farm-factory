@@ -1,11 +1,23 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, Wind, Leaf, Sprout } from "lucide-react";
 import { motion } from "framer-motion";
+import React from 'react';
+import SpinningGlobe from '../components/SpinningGlobe';
+import '../components/ui/styles.css';
 
-const Welcome = () => {
+const HomePage: React.FC = () => {
+  return (
+    <div>
+      <h1>Welcome to EcoField</h1>
+      <SpinningGlobe />
+      {/* Other content */}
+    </div>
+  );
+};
+
+const Welcome: React.FC = () => {
   const navigate = useNavigate();
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -14,122 +26,18 @@ const Welcome = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#222222] overflow-hidden relative">
-      {/* Spinning Earth Background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <motion.div 
-          className="absolute top 1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[150vh] h-[150vh] opacity-20"
-          animate={{ 
-            rotate: 360,
-          }}
-          transition={{
-            duration: 200,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-          style={{
-            background: `radial-gradient(circle at center, 
-              transparent 0%,
-              transparent 40%,
-              rgba(74, 93, 79, 0.1) 40.5%,
-              rgba(74, 93, 79, 0.1) 41%,
-              transparent 41.5%,
-              transparent 43%,
-              rgba(74, 93, 79, 0.1) 43.5%,
-              rgba(74, 93, 79, 0.1) 44%,
-              transparent 44.5%,
-              transparent 46%,
-              rgba(74, 93, 79, 0.1) 46.5%,
-              rgba(74, 93, 79, 0.1) 47%,
-              transparent 47.5%
-            )`
-          }}
-        />
-      </div>
-
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* Floating Leaves */}
-        {[...Array(8)].map((_, i) => (
-          <motion.div
-            key={i}
-            initial={{ 
-              x: Math.random() * window.innerWidth,
-              y: -100,
-              rotate: 0
-            }}
-            animate={{
-              x: Math.random() * window.innerWidth,
-              y: window.innerHeight + 100,
-              rotate: 360
-            }}
-            transition={{
-              duration: 15 + Math.random() * 10,
-              repeat: Infinity,
-              delay: i * 2,
-              ease: "linear"
-            }}
-            className="absolute"
-          >
-            <Leaf className={`w-${8 + i * 2} h-${8 + i * 2} text-primary/20`} />
-          </motion.div>
-        ))}
-
-        {/* Animated Vines */}
-        {[...Array(4)].map((_, i) => (
-          <motion.div
-            key={`vine-${i}`}
-            className="absolute top-0 left-1/4"
-            style={{ left: `${(i + 1) * 20}%` }}
-            initial={{ height: 0 }}
-            animate={{ 
-              height: ['0%', '100%', '90%', '100%'],
-              pathLength: [0, 1]
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut",
-              delay: i * 1.5
-            }}
-          >
-            <div className="w-1 bg-gradient-to-b from-primary/10 to-primary/30 rounded-full" 
-                 style={{ height: '100%' }}>
-              {[...Array(3)].map((_, j) => (
-                <motion.div
-                  key={`leaf-${i}-${j}`}
-                  className="absolute"
-                  style={{ top: `${j * 30}%`, left: '-10px' }}
-                  animate={{
-                    rotate: [0, 10, -10, 0],
-                    scale: [1, 1.1, 1]
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    delay: j * 0.5
-                  }}
-                >
-                  <Sprout className="w-6 h-6 text-primary/40" />
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Main Content */}
+    <div className="min-h-screen bg-gradient-to-r from-earthtone-50 to-earthtone-400 overflow-hidden relative">
+      {/* Main content for Welcome page */}
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4">
         <div className={`text-center space-y-8 transform transition-all duration-1000 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
           <motion.h1 
-            className="text-6xl md:text-7xl font-bold text-white mb-6"
+            className="text-8xl md:text-7xl font-bold text-black mb-6"
             animate={{ scale: [1, 1.02, 1] }}
             transition={{ duration: 3, repeat: Infinity }}
           >
             Welcome to
             <motion.span 
-              className="block text-primary mt-2"
+              className="block text-black mt-2"
               animate={{ 
                 backgroundPosition: ["0% 0%", "100% 100%"],
                 color: ["#4A5D4F", "#8FA498", "#4A5D4F"]
@@ -139,35 +47,12 @@ const Welcome = () => {
               EcoField
             </motion.span>
           </motion.h1>
-          
-          {/* Animated Globe */}
-          <div className="relative w-64 h-64 mx-auto my-12">
-            <motion.div 
-              className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/20 to-primary"
-              animate={{ 
-                scale: [1, 1.1, 1],
-                rotate: 360
-              }}
-              transition={{
-                duration: 10,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-            />
-            <motion.div 
-              className="absolute inset-2 rounded-full bg-gradient-to-br from-earthtone-200 to-primary"
-              animate={{ rotate: 360 }}
-              transition={{
-                duration: 20,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-            />
-            <div className="absolute inset-4 rounded-full bg-[#222222]/90 backdrop-blur-sm" />
-          </div>
+
+          {/* Spinning Globe */}
+          <SpinningGlobe />
 
           <motion.p 
-            className="text-xl text-earthtone-300 max-w-2xl mx-auto mb-8"
+            className="text-xl text-earthtone-900 max-w-2xl mx-auto mb-8"
             animate={{ opacity: [0.8, 1, 0.8] }}
             transition={{ duration: 3, repeat: Infinity }}
           >
@@ -189,8 +74,37 @@ const Welcome = () => {
           </motion.div>
         </div>
       </div>
+
+      {/* Features Section */}
+      <section className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div className="text-center">
+          <Leaf className="h-16 w-16 mx-auto text-green-500" />
+          <h3 className="mt-4 text-xl font-semibold">Carbon Capture Estimates</h3>
+          <p className="mt-2 text-gray-600">Accurately calculate how much carbon your land can capture.</p>
+        </div>
+        <div className="text-center">
+          <Wind className="h-16 w-16 mx-auto text-blue-500" />
+          <h3 className="mt-4 text-xl font-semibold">Sustainability Insights</h3>
+          <p className="mt-2 text-gray-600">Get actionable insights to improve your sustainability practices.</p>
+        </div>
+        <div className="text-center">
+          <Sprout className="h-16 w-16 mx-auto text-green-600" />
+          <h3 className="mt-4 text-xl font-semibold">Track Your Progress</h3>
+          <p className="mt-2 text-gray-600">Monitor your environmental impact over time and see your progress grow.</p>
+        </div>
+      </section>
+
+      <div className="moving-object">
+        <Leaf className="h-16 w-16 text-green-500" />
+      </div>
+
+      {/* Footer */}
+      <footer className="mt-16 py-6 bg-gray-100 text-center">
+        <p className="text-sm text-gray-500">&copy; 2025 EcoField. All rights reserved.</p>
+      </footer>
     </div>
   );
 };
 
+export { HomePage, Welcome };
 export default Welcome;

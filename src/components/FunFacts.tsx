@@ -4,14 +4,19 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Leaf } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Lightbulb } from "lucide-react";
 
 const facts = [
-  "Converting to sustainable farming practices can reduce carbon emissions by up to 170%!",
-  "Regenerative agriculture could offset all current global CO2 emissions!",
-  "Cover crops can sequester up to 3 tons of CO2 per acre annually.",
-  "Soil organic matter has decreased by 50% in the last century due to intensive farming.",
-  "Sustainable farming practices can increase crop yields by 20% or more!",
-  "One acre of regenerative farmland can offset the annual emissions of 2 cars.",
+  "🌍 Carbon capture can remove up to 90% of CO₂ emissions from power plants!",
+  "🌱 One mature tree absorbs about 48 pounds of CO₂ per year.",
+  "💨 Healthy soil = healthier crops.",
+  "🍄 Sustainable farming practices can help reduce your energy bills and make your farm more profitable in the long run!",
+  "🏗️ One acre of healthy farmland offsets car emissions!",
+  "🔄 CO₂ can be recycled into fuel for airplanes and cars!",
+  "🐄 Adding seaweed to cattle feed can reduce methane emissions by over 80%.",
+  "🚜 Farming practices that store carbon in the soil not only help fight climate change but also improve your land's productivity.",
+  "🏞️ Soil stores more carbon than all plants and the atmosphere combined!",
+  "🏝️ Soil health is key to feeding the world sustainably.",
 ];
 
 const FunFacts = () => {
@@ -22,7 +27,7 @@ const FunFacts = () => {
     const timer = setInterval(() => {
       setDirection(1);
       setCurrentFact((prev) => (prev + 1) % facts.length);
-    }, 4000);
+    }, 5000);
 
     return () => clearInterval(timer);
   }, []);
@@ -82,7 +87,7 @@ const FunFacts = () => {
                     x: { type: "spring", stiffness: 300, damping: 30 },
                     opacity: { duration: 0.2 }
                   }}
-                  className="text-center text-xl text-earthtone-600 absolute w-full"
+                  className="text-center text-xl text-black"
                 >
                   {facts[currentFact]}
                 </motion.p>
