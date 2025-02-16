@@ -56,9 +56,9 @@ const Index = () => {
       area: updatedArea,
       time_period: parseInt(years) || 0,
       application_rate: applicationRate,
-      clay_percentage: clayPercentage,
-      silt_percentage: siltPercentage,
-      sand_percentage: sandPercentage,
+      clay_pct: clayPercentage,
+      silt_pct: siltPercentage,
+      sand_pct: sandPercentage,
     };
 
     setIsLoading(true);
@@ -138,7 +138,9 @@ const Index = () => {
                 <TimeWindowInput value={years} onChange={setYears} />
                 {/* Application Rate Slider */}
                 <div className="flex flex-col">
-                  <label className="text-lg font-medium">Application Rate</label>
+                  <label className="text-lg font-medium">
+                    Application Rate
+                  </label>
                   <input
                     type="range"
                     min="0"
@@ -158,11 +160,17 @@ const Index = () => {
                 </div>
                 {/* Clay Percentage */}
                 <div className="flex flex-col">
-                  <label className="text-lg font-medium">Clay Percentage (0 - 1)</label>
+                  <label className="text-lg font-medium">
+                    Clay Percentage (0 - 1)
+                  </label>
                   <input
                     type="number"
                     value={clayPercentage}
-                    onChange={(e) => setClayPercentage(Math.min(1, Math.max(0, parseFloat(e.target.value))))}
+                    onChange={(e) =>
+                      setClayPercentage(
+                        Math.min(1, Math.max(0, parseFloat(e.target.value)))
+                      )
+                    }
                     className="mt-2 p-2 rounded border"
                     step="0.01"
                     min="0"
@@ -171,11 +179,17 @@ const Index = () => {
                 </div>
                 {/* Silt Percentage */}
                 <div className="flex flex-col">
-                  <label className="text-lg font-medium">Silt Percentage (0 - 1)</label>
+                  <label className="text-lg font-medium">
+                    Silt Percentage (0 - 1)
+                  </label>
                   <input
                     type="number"
                     value={siltPercentage}
-                    onChange={(e) => setSiltPercentage(Math.min(1, Math.max(0, parseFloat(e.target.value))))}
+                    onChange={(e) =>
+                      setSiltPercentage(
+                        Math.min(1, Math.max(0, parseFloat(e.target.value)))
+                      )
+                    }
                     className="mt-2 p-2 rounded border"
                     step="0.01"
                     min="0"
@@ -184,11 +198,17 @@ const Index = () => {
                 </div>
                 {/* Sand Percentage */}
                 <div className="flex flex-col">
-                  <label className="text-lg font-medium">Sand Percentage (0 - 1)</label>
+                  <label className="text-lg font-medium">
+                    Sand Percentage (0 - 1)
+                  </label>
                   <input
                     type="number"
                     value={sandPercentage}
-                    onChange={(e) => setSandPercentage(Math.min(1, Math.max(0, parseFloat(e.target.value))))}
+                    onChange={(e) =>
+                      setSandPercentage(
+                        Math.min(1, Math.max(0, parseFloat(e.target.value)))
+                      )
+                    }
                     className="mt-2 p-2 rounded border"
                     step="0.01"
                     min="0"
