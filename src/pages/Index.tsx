@@ -34,6 +34,10 @@ const Index = () => {
   const [area, setArea] = useState("");
   const [unit, setUnit] = useState("acres");
   const [years, setYears] = useState("");
+  const [applicationRate, setApplicationRate] = useState(0);
+  const [clayPercentage, setClayPercentage] = useState(0);
+  const [siltPercentage, setSiltPercentage] = useState(0);
+  const [sandPercentage, setSandPercentage] = useState(0);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [inference, setInference] = useState(null);
@@ -51,10 +55,10 @@ const Index = () => {
       feedstock_type: feedstock,
       area: updatedArea,
       time_period: parseInt(years) || 0,
-      application_rate: 2, // tonnes per hectare
-      clay_pct: 0.2,
-      silt_pct: 0.5,
-      sand_pct: 0.1,
+      application_rate: applicationRate,
+      clay_percentage: clayPercentage,
+      silt_percentage: siltPercentage,
+      sand_percentage: sandPercentage,
     };
 
     setIsLoading(true);
@@ -77,6 +81,10 @@ const Index = () => {
     setFeedstock("");
     setArea("");
     setYears("");
+    setApplicationRate(0);
+    setClayPercentage(0);
+    setSiltPercentage(0);
+    setSandPercentage(0);
   };
 
   if (isLoading) {
@@ -101,7 +109,7 @@ const Index = () => {
           >
             <h1 className="text-6xl md:text-8xl font-extrabold text-white tracking-tight leading-tight">
               Estimate Your{" "}
-              <span className="bg-gradient-to-r from-primary via-earthtone-400 to-primary bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-primary via-earthtone-800 to-primary bg-clip-text text-transparent">
                 Carbon Impact
               </span>
             </h1>
@@ -128,6 +136,65 @@ const Index = () => {
                   onUnitChange={setUnit}
                 />
                 <TimeWindowInput value={years} onChange={setYears} />
+                {/* Application Rate Slider */}
+                <div className="flex flex-col">
+                  <label className="text-lg font-medium">Application Rate</label>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value={applicationRate}
+                    onChange={(e) => setApplicationRate(Number(e.target.value))}
+                    className="mt-2"
+                  />
+                  <input
+                    type="number"
+                    value={applicationRate}
+                    onChange={(e) => setApplicationRate(Number(e.target.value))}
+                    className="mt-2 p-2 rounded border"
+                    min="0"
+                    max="100"
+                  />
+                </div>
+                {/* Clay Percentage */}
+                <div className="flex flex-col">
+                  <label className="text-lg font-medium">Clay Percentage (0 - 1)</label>
+                  <input
+                    type="number"
+                    value={clayPercentage}
+                    onChange={(e) => setClayPercentage(Math.min(1, Math.max(0, parseFloat(e.target.value))))}
+                    className="mt-2 p-2 rounded border"
+                    step="0.01"
+                    min="0"
+                    max="1"
+                  />
+                </div>
+                {/* Silt Percentage */}
+                <div className="flex flex-col">
+                  <label className="text-lg font-medium">Silt Percentage (0 - 1)</label>
+                  <input
+                    type="number"
+                    value={siltPercentage}
+                    onChange={(e) => setSiltPercentage(Math.min(1, Math.max(0, parseFloat(e.target.value))))}
+                    className="mt-2 p-2 rounded border"
+                    step="0.01"
+                    min="0"
+                    max="1"
+                  />
+                </div>
+                {/* Sand Percentage */}
+                <div className="flex flex-col">
+                  <label className="text-lg font-medium">Sand Percentage (0 - 1)</label>
+                  <input
+                    type="number"
+                    value={sandPercentage}
+                    onChange={(e) => setSandPercentage(Math.min(1, Math.max(0, parseFloat(e.target.value))))}
+                    className="mt-2 p-2 rounded border"
+                    step="0.01"
+                    min="0"
+                    max="1"
+                  />
+                </div>
               </div>
 
               {errorMsg && (

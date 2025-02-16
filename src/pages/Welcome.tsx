@@ -22,89 +22,146 @@ const Welcome: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    setIsLoaded(true);
+  setIsLoaded(true);
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-earthtone-50 to-earthtone-400 overflow-hidden relative">
-      {/* Main content for Welcome page */}
-      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4">
-        <div className={`text-center space-y-8 transform transition-all duration-1000 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          <motion.h1 
-            className="text-8xl md:text-7xl font-bold text-black mb-6"
-            animate={{ scale: [1, 1.02, 1] }}
-            transition={{ duration: 3, repeat: Infinity }}
-          >
-            Welcome to
-            <motion.span 
-              className="block text-black mt-2"
-              animate={{ 
-                backgroundPosition: ["0% 0%", "100% 100%"],
-                color: ["#4A5D4F", "#8FA498", "#4A5D4F"]
-              }}
-              transition={{ duration: 5, repeat: Infinity }}
+    <div className="min-h-screen bg-white overflow-hidden relative">
+      {/* Background gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-green-50 to-green-100" />
+
+      {/* Navigation */}
+      <nav className="relative z-20 p-4">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <div className="text-8xl font-bold flex items-center">
+            <span className="text-green-600">eco</span>
+            <span className="text-earthtone-600 ml-4">field</span>
+          </div>
+          <div className="hidden md:flex space-x-6">
+            <a href="#" className="text-gray-600 hover:text-green-800">Home</a>
+            <a href="#" className="text-gray-600 hover:text-green-800">Field</a>
+            <a href="#" className="text-gray-600 hover:text-green-800">Store</a>
+            <a href="#" className="text-gray-600 hover:text-green-800">Pelos</a>
+            <a href="#" className="text-gray-600 hover:text-green-800">Learn More</a>
+            <a href="#" className="text-gray-600 hover:text-green-800">About</a>
+            <a href="#" className="text-gray-600 hover:text-green-800">Company</a>
+          </div>
+        </div>
+      </nav>
+
+      {/* Main Hero Section */}
+      <div className="relative z-10 min-h-[calc(100vh-80px)] flex">
+        <div className="max-w-7xl mx-auto px-6 w-full flex items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 w-full items-center">
+            {/* Left Content */}
+            <motion.div 
+              className={`space-y-8 transform transition-all duration-1000 ${
+                isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+              }`}
             >
-              EcoField
-            </motion.span>
-          </motion.h1>
+              <div className="space-y-4">
+                <motion.h1 
+                  className="text-7xl md:text-8xl font-bold text-gray-800 font-serif"
+                  animate={{ scale: [1, 1.02, 1] }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                >
+                  Empowering Farmers
+                </motion.h1>
+                <motion.div 
+                  className="text-5xl md:text-3xl font-bold text-gray-800 font-sans mt-4"
+                  animate={{ scale: [1, 1.02, 1] }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                >
+                  <span className="italic">Sustainability &</span>
+                  <span className="italic">Carbon Capture Hub</span>
+                </motion.div>
+              </div>
 
-          {/* Spinning Globe */}
-          <SpinningGlobe />
+              <motion.p 
+                className="text-2xl text-white-600"
+                animate={{ opacity: [0.8, 1, 0.8] }}
+                transition={{ duration: 3, repeat: Infinity }}
+              >
+                Farmers, Calculate Your Carbon Capture and Unlock Payments for Sustainability.
+              </motion.p>
 
-          <motion.p 
-            className="text-xl text-earthtone-900 max-w-2xl mx-auto mb-8"
-            animate={{ opacity: [0.8, 1, 0.8] }}
-            transition={{ duration: 3, repeat: Infinity }}
-          >
-            Join us in measuring and maximizing your farm's contribution to global sustainability
-          </motion.p>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button
+                  onClick={() => navigate("/calculator")}
+                  size="lg"
+                  className="bg-green-600 hover:bg-green-700 text-white px-8 py-6 text-xl rounded-lg flex items-center gap-2"
+                >
+                  Ready to Start
+                  <ArrowRight className="ml-2 h-6 w-6" />
+                </Button>
+              </motion.div>
+            </motion.div>
 
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Button
-              onClick={() => navigate("/calculator")}
-              size="lg"
-              className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-xl rounded-full transform transition-all hover:shadow-xl"
-            >
-              Start Your Sustainability Journey
-              <ArrowRight className="ml-2 h-6 w-6" />
-            </Button>
-          </motion.div>
+            {/* Right Content - Globe */}
+            <div className="relative">
+              {/* Decorative Elements */}
+              <motion.div 
+                className="absolute -top-20 -right-20 w-40 h-40 text-green-400"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              >
+                <Leaf className="w-full h-full opacity-20" />
+              </motion.div>
+              
+              {/* Globe Component */}
+              <div className="relative w-full aspect-square">
+                <SpinningGlobe />
+              </div>
+
+              {/* Bottom Decorative Elements */}
+              <motion.div 
+                className="absolute -bottom-10 -left-10 w-32 h-32"
+                animate={{ rotate: -360 }}
+                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+              >
+                <Sprout className="w-full h-full text-green-500 opacity-20" />
+              </motion.div>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Features Section */}
-      <section className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-12">
-        <div className="text-center">
-          <Leaf className="h-16 w-16 mx-auto text-green-500" />
-          <h3 className="mt-4 text-xl font-semibold">Carbon Capture Estimates</h3>
-          <p className="mt-2 text-gray-600">Accurately calculate how much carbon your land can capture.</p>
-        </div>
-        <div className="text-center">
-          <Wind className="h-16 w-16 mx-auto text-blue-500" />
-          <h3 className="mt-4 text-xl font-semibold">Sustainability Insights</h3>
-          <p className="mt-2 text-gray-600">Get actionable insights to improve your sustainability practices.</p>
-        </div>
-        <div className="text-center">
-          <Sprout className="h-16 w-16 mx-auto text-green-600" />
-          <h3 className="mt-4 text-xl font-semibold">Track Your Progress</h3>
-          <p className="mt-2 text-gray-600">Monitor your environmental impact over time and see your progress grow.</p>
+      <section className="relative z-10 bg-white py-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <motion.div 
+              className="text-center"
+              whileHover={{ y: -10 }}
+            >
+              <Leaf className="h-16 w-16 mx-auto text-green-500" />
+              <h3 className="mt-4 text-xl font-semibold">Carbon Capture Estimates</h3>
+              <p className="mt-2 text-gray-600">Accurately calculate how much carbon your land can capture.</p>
+            </motion.div>
+            <motion.div 
+              className="text-center"
+              whileHover={{ y: -10 }}
+            >
+              <Wind className="h-16 w-16 mx-auto text-blue-500" />
+              <h3 className="mt-4 text-xl font-semibold">Sustainability Insights</h3>
+              <p className="mt-2 text-gray-600">Get actionable insights to improve your sustainability practices.</p>
+            </motion.div>
+            <motion.div 
+              className="text-center"
+              whileHover={{ y: -10 }}
+            >
+              <Sprout className="h-16 w-16 mx-auto text-green-600" />
+              <h3 className="mt-4 text-xl font-semibold">Track Your Progress</h3>
+              <p className="mt-2 text-gray-600">Monitor your environmental impact over time.</p>
+            </motion.div>
+          </div>
         </div>
       </section>
-
-      <div className="moving-object">
-        <Leaf className="h-16 w-16 text-green-500" />
-      </div>
-
-      {/* Footer */}
-      <footer className="mt-16 py-6 bg-gray-100 text-center">
-        <p className="text-sm text-gray-500">&copy; 2025 EcoField. All rights reserved.</p>
-      </footer>
     </div>
   );
 };
 
-export { HomePage, Welcome };
 export default Welcome;

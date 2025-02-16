@@ -39,21 +39,3 @@ body {
     from { background-position: 0px 0px; }
     to { background-position: 500px 0px; }
   }
-
-  /* Add this CSS to your styles.css */
-@keyframes float {
-    0% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-20px);
-    }
-    100% {
-      transform: translateY(0);
-    }
-  }
-  
-  .moving-object {
-    animation: float 5s ease-in-out infinite;
-  }
-  
