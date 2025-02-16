@@ -228,6 +228,66 @@ const ResultsView = ({ data, years }: ResultsViewProps) => {
         <Line data={chartData} options={options} />
       </div>
 
+      {/* Chart Title */}
+      <h2 className="text-2xl font-bold mb-4 text-white">
+        Annual Cash Flows and Costs Over Time
+      </h2>
+
+      {/* Line Chart */}
+      <div className="bg-white p-6 rounded-lg shadow-lg">
+        <Line
+          data={{
+            labels: data.financial_analysis.annual_cash_flows.map(
+              (flow, index) => `Year ${index + 1}`
+            ),
+            datasets: [
+              {
+                label: "Annual Cash Flows",
+                data: data.financial_analysis.annual_cash_flows,
+                backgroundColor: "#00A0E8",
+                borderColor: "#00A0E8",
+                fill: false,
+                tension: 0.1,
+              },
+              {
+                label: "Yearly Costs",
+                data: data.financial_analysis.yearly_costs,
+                backgroundColor: "#FF6B6B",
+                borderColor: "#FF6B6B",
+                fill: false,
+                tension: 0.1,
+              },
+            ],
+          }}
+          options={{
+            plugins: {
+              title: {
+                display: false,
+              },
+              legend: {
+                display: true,
+                position: 'top',
+              },
+            },
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: "Time",
+                },
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: "Amount ($)",
+                },
+              },
+            },
+          }}
+        />
+      </div>
+      
+
       {/* Executive Summary & Latest News in two columns */}
       <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="p-4 border rounded-md bg-gray-100">
